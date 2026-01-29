@@ -1,0 +1,20 @@
+[
+  {
+    "id": "user_20260126013412_1",
+    "name": "Mihwar Digital",
+    "email": "mihwardigital@gmail.com",
+    "password": "123456",
+    "role": "company",
+    "created_at": "2026-01-26T01:34:12.712069",
+    "companyName": "Mihwar Digital",
+    "website": "https://mihwardigital.com"
+  },
+  {
+    "id": "user_20260127163201_2",
+    "name": "Fazeel Ayaz Qasimi",
+    "email": "fazeelayaz@gmail.com",
+    "password": "fazeel123",
+    "role": "seeker",
+    "created_at": "2026-01-27T16:32:01.444117"
+  }
+]

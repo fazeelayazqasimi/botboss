@@ -1,0 +1,50 @@
+[
+  {
+    "id": "app_20260115185641_1",
+    "jobId": "job_20260115181333_1",
+    "jobTitle": "Developer",
+    "candidateName": "Fazeel Ayaz Qasimi",
+    "candidateEmail": "fazeelayazqasimi31@gmail.com",
+    "resumeUrl": "",
+    "additionalInfo": "I'm interested in this position and my skills match your requirements.",
+    "appliedDate": "2026-01-15T18:56:41.293177",
+    "status": "pending",
+    "updated_at": "2026-01-15T18:56:41.293177"
+  },
+  {
+    "id": "app_20260115191132_2",
+    "jobId": "job_20260115191105_4",
+    "jobTitle": "Mern Stack Developer",
+    "candidateName": "Fazeel Ayaz Qasimi",
+    "candidateEmail": "fazeelayazqasimi31@gmail.com",
+    "resumeUrl": "",
+    "additionalInfo": "I'm interested in this position and my skills match your requirements.",
+    "appliedDate": "2026-01-15T19:11:32.789797",
+    "status": "pending",
+    "updated_at": "2026-01-15T19:11:32.789797"
+  },
+  {
+    "id": "app_20260127165800_3",
+    "jobId": "job_20260115184104_2",
+    "jobTitle": "Sales Person",
+    "candidateName": "Fazeel Ayaz Qasimi",
+    "candidateEmail": "fazeelayaz@gmail.com",
+    "resumeUrl": "",
+    "additionalInfo": "I'm interested in this position and my skills match your requirements.",
+    "appliedDate": "2026-01-27T16:58:00.295766",
+    "status": "pending",
+    "updated_at": "2026-01-27T16:58:00.295766"
+  },
+  {
+    "id": "app_20260128165235_4",
+    "jobId": "job_20260128165128_5",
+    "jobTitle": "Nokar Chahiye Ghr kelie",
+    "candidateName": "Fazeel Ayaz Qasimi",
+    "candidateEmail": "fazeelayaz@gmail.com",
+    "resumeUrl": "",
+    "additionalInfo": "I'm interested in this position and my skills match your requirements.",
+    "appliedDate": "2026-01-28T16:52:35.054909",
+    "status": "pending",
+    "updated_at": "2026-01-28T16:52:35.054909"
+  }
+]
