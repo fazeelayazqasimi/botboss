@@ -26,7 +26,6 @@ function SeekerDashboard() {
     type: 'all',
     salary: 'all'
   });
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const API_URL = 'https://mihwardigital-botboss-flask-backend.hf.space/api';
 
@@ -263,11 +262,6 @@ function SeekerDashboard() {
     reader.readAsDataURL(file);
   };
 
-  const handleNavClick = (tabId) => {
-    setActiveTab(tabId);
-    setIsMobileMenuOpen(false);
-  };
-
   const filteredJobs = availableJobs.filter(job => {
     const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          job.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -296,29 +290,8 @@ function SeekerDashboard() {
 
   return (
     <div style={styles.dashboardContainer}>
-      {/* Mobile Menu Toggle Button */}
-      <button
-        style={styles.mobileMenuToggle}
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-      >
-        <span style={styles.menuToggleLine}></span>
-        <span style={styles.menuToggleLine}></span>
-        <span style={styles.menuToggleLine}></span>
-      </button>
-
-      {/* Mobile Overlay */}
-      {isMobileMenuOpen && (
-        <div 
-          style={styles.mobileOverlay}
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
       {/* SIDEBAR */}
-      <aside style={{
-        ...styles.sidebar,
-        ...(isMobileMenuOpen ? styles.sidebarMobileOpen : {})
-      }}>
+      <aside style={styles.sidebar}>
         <div style={styles.sidebarHeader}>
           <div style={styles.logo}>
             <div style={styles.logoIcon}>
@@ -351,7 +324,7 @@ function SeekerDashboard() {
             <button
               key={item.id}
               style={activeTab === item.id ? styles.activeNavItem : styles.navItem}
-              onClick={() => handleNavClick(item.id)}
+              onClick={() => setActiveTab(item.id)}
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(0, 255, 136, 0.05)'}
               onMouseLeave={(e) => {
                 if (activeTab !== item.id) {
@@ -663,7 +636,7 @@ function SeekerDashboard() {
                           <button
                             style={isApplied ? styles.viewButton : styles.applyButton}
                             onClick={() => isApplied ? 
-                              handleNavClick('applied') : 
+                              setActiveTab('applied') : 
                               handleApplyJob(job)
                             }
                             disabled={isApplied}
@@ -728,7 +701,7 @@ function SeekerDashboard() {
                   </div>
                 ) : (
                   <button 
-                    onClick={() => handleNavClick('profile')}
+                    onClick={() => setActiveTab('profile')}
                     style={styles.addSkillsButton}
                   >
                     Add Your Skills
@@ -747,7 +720,7 @@ function SeekerDashboard() {
                   <h3 style={styles.emptyTitle}>No Matches Found</h3>
                   <p style={styles.emptyText}>Complete your profile to get personalized job recommendations</p>
                   <button 
-                    onClick={() => handleNavClick('profile')}
+                    onClick={() => setActiveTab('profile')}
                     style={styles.primaryButton}
                   >
                     Complete Your Profile
@@ -816,7 +789,7 @@ function SeekerDashboard() {
                           <button
                             style={isApplied ? styles.viewButton : styles.applyButton}
                             onClick={() => isApplied ? 
-                              handleNavClick('applied') : 
+                              setActiveTab('applied') : 
                               handleApplyJob(job)
                             }
                             disabled={isApplied}
@@ -862,7 +835,7 @@ function SeekerDashboard() {
                   <h3 style={styles.emptyTitle}>No Applications Yet</h3>
                   <p style={styles.emptyText}>Browse jobs and start applying!</p>
                   <button 
-                    onClick={() => handleNavClick('browse')}
+                    onClick={() => setActiveTab('browse')}
                     style={styles.primaryButton}
                   >
                     Browse Jobs
@@ -1073,7 +1046,6 @@ function SeekerDashboard() {
               onSave={handleSaveProfile}
               onUploadResume={handleUploadResume}
               loading={loading.profile}
-              onNavClick={handleNavClick}
             />
           )}
         </div>
@@ -1089,7 +1061,7 @@ function SeekerDashboard() {
 }
 
 // Profile Section Component
-const ProfileSection = ({ user, profile, onSave, onUploadResume, loading, onNavClick }) => {
+const ProfileSection = ({ user, profile, onSave, onUploadResume, loading }) => {
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({
     skills: profile?.skills || [],
@@ -1429,45 +1401,6 @@ const styles = {
     color: '#ffffff'
   },
   
-  // Mobile Menu Toggle
-  mobileMenuToggle: {
-    display: 'none',
-    position: 'fixed',
-    top: '20px',
-    left: '20px',
-    width: '44px',
-    height: '44px',
-    background: 'linear-gradient(135deg, #00ff88 0%, #00cc6a 100%)',
-    border: 'none',
-    borderRadius: '8px',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '4px',
-    zIndex: 1001,
-    cursor: 'pointer',
-    boxShadow: '0 2px 8px rgba(0, 255, 136, 0.3)'
-  },
-  
-  menuToggleLine: {
-    width: '20px',
-    height: '2px',
-    background: '#0a0a0a',
-    borderRadius: '1px',
-    transition: 'all 0.3s ease'
-  },
-  
-  mobileOverlay: {
-    display: 'none',
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: 'rgba(0, 0, 0, 0.8)',
-    zIndex: 999
-  },
-  
   // Sidebar Styles
   sidebar: {
     width: '280px',
@@ -1478,15 +1411,8 @@ const styles = {
     position: 'sticky',
     top: 0,
     height: '100vh',
-    borderRight: '1px solid #2a2a2a',
-    transition: 'transform 0.3s ease',
-    zIndex: 1000
+    borderRight: '1px solid #2a2a2a'
   },
-  
-  sidebarMobileOpen: {
-    transform: 'translateX(0)'
-  },
-  
   sidebarHeader: {
     display: 'flex',
     alignItems: 'center',
@@ -2631,278 +2557,8 @@ styleSheet.textContent = `
   ::-webkit-scrollbar-thumb:hover {
     background: #00ff88;
   }
+
   
-  /* Mobile Responsive Styles */
-  @media (max-width: 768px) {
-    .dashboardContainer {
-      flex-direction: column;
-    }
-    
-    .mobileMenuToggle {
-      display: flex;
-    }
-    
-    .mobileOverlay {
-      display: block;
-    }
-    
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: -280px;
-      height: 100vh;
-      width: 280px;
-      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
-      transform: translateX(-280px);
-    }
-    
-    .sidebarMobileOpen {
-      transform: translateX(280px);
-      left: 0;
-    }
-    
-    .mainContent {
-      margin-left: 0;
-    }
-    
-    .header {
-      padding: 20px 16px;
-      flex-direction: column;
-      gap: 16px;
-    }
-    
-    .pageTitle {
-      margin-top: 60px;
-      font-size: 24px;
-    }
-    
-    .headerActions {
-      width: 100%;
-      flex-direction: column;
-      gap: 16px;
-    }
-    
-    .searchBox {
-      width: 100%;
-    }
-    
-    .userMenu {
-      justify-content: center;
-      padding: 12px;
-    }
-    
-    .content {
-      padding: 20px 16px;
-    }
-    
-    .statsGrid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-    
-    .statCard {
-      padding: 16px;
-    }
-    
-    .statValue {
-      font-size: 24px;
-    }
-    
-    .filtersContainer {
-      flex-direction: column;
-      gap: 12px;
-    }
-    
-    .filterGroup {
-      min-width: 100%;
-    }
-    
-    .jobsGrid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    
-    .jobCard {
-      padding: 20px;
-    }
-    
-    .jobDetails {
-      grid-template-columns: 1fr;
-      gap: 8px;
-    }
-    
-    .matchedJobCard {
-      padding: 20px;
-    }
-    
-    .matchHeader {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    
-    .matchScore {
-      align-self: flex-start;
-      margin-left: 0;
-    }
-    
-    .matchDetails {
-      flex-direction: column;
-      gap: 8px;
-    }
-    
-    .applicationCard {
-      padding: 20px;
-    }
-    
-    .applicationHeader {
-      flex-direction: column;
-      gap: 12px;
-    }
-    
-    .appStatusContainer {
-      flex-direction: row;
-      align-items: center;
-      width: 100%;
-      justify-content: space-between;
-    }
-    
-    .interviewCards {
-      grid-templateColumns: 1fr;
-      gap: 16px;
-    }
-    
-    .interviewCard {
-      padding: 24px;
-    }
-    
-    .profileCard {
-      padding: 20px;
-    }
-    
-    .profileHeader {
-      flex-direction: column;
-      text-align: center;
-      gap: 16px;
-    }
-    
-    .editButton, .cancelButton {
-      margin-left: 0;
-      width: 100%;
-    }
-    
-    .grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    
-    .skillsGrid, .jobTypesGrid {
-      justify-content: center;
-    }
-    
-    .resumeSection {
-      flex-direction: column;
-      gap: 16px;
-      text-align: center;
-    }
-    
-    .footer {
-      padding: 20px 16px;
-      font-size: 12px;
-    }
-    
-    .navItem, .logoutButton {
-      min-height: 48px;
-      padding: 12px 16px;
-    }
-    
-    .applyButton, .viewButton, .saveButton, .primaryButton, .secondaryButton, .actionButton {
-      min-height: 48px;
-      padding: 12px;
-    }
-    
-    .searchInput, .filterSelect, .formInput {
-      min-height: 44px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .statsGrid {
-      grid-template-columns: 1fr;
-    }
-    
-    .statValue {
-      font-size: 20px;
-    }
-    
-    .skillButton, .jobTypeButton {
-      padding: 6px 12px;
-      font-size: 12px;
-    }
-    
-    .skillTag, .matchedSkillTag, .jobTypeTag {
-      padding: 4px 8px;
-      font-size: 11px;
-    }
-    
-    .jobCard, .matchedJobCard, .applicationCard, .interviewCard, .profileCard {
-      padding: 16px;
-    }
-    
-    .pageTitle {
-      font-size: 20px;
-    }
-    
-    .sectionTitle {
-      font-size: 18px;
-    }
-    
-    .jobTitle {
-      font-size: 16px;
-    }
-    
-    .userNameSmall {
-      font-size: 12px;
-    }
-    
-    .userRoleSmall {
-      font-size: 10px;
-    }
-  }
-  
-  @media (min-width: 769px) and (max-width: 1024px) {
-    .sidebar {
-      width: 240px;
-      padding: 24px 16px;
-    }
-    
-    .jobsGrid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .interviewCards {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .content {
-      padding: 24px 32px;
-    }
-    
-    .header {
-      padding: 24px 32px;
-    }
-  }
-  
-  /* Prevent horizontal scrolling on mobile */
-  @media (max-width: 768px) {
-    html, body {
-      overflow-x: hidden;
-    }
-    
-    body {
-      position: relative;
-    }
-  }
 `;
 document.head.appendChild(styleSheet);
 
