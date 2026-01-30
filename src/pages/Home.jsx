@@ -28,7 +28,7 @@ const Home = () => {
     location: ''
   });
 
-  const API_URL = 'http://localhost:5000/api';
+  const API_URL = 'https://mihwardigital-botboss-flask-backend.hf.space/api';
 
   useEffect(() => {
     const loggedIn = localStorage.getItem('isLoggedIn');
