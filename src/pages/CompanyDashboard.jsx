@@ -40,7 +40,7 @@ function CompanyDashboard() {
   const [sortBy, setSortBy] = useState('newest');
   const [notification, setNotification] = useState({ show: false, message: '', type: '' });
   
-  const API_URL = 'http://localhost:5000/api';
+  const API_URL = 'https://mihwardigital-botboss-flask-backend.hf.space/api';
   const modalRef = useRef(null);
 
   useEffect(() => {
