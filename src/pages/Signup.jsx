@@ -54,7 +54,7 @@ function Signup() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/signup', {
+      const response = await fetch('https://mihwardigital-botboss-flask-backend.hf.space/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
