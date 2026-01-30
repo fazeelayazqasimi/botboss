@@ -21,7 +21,7 @@ const JobsList = () => {
   const [sortBy, setSortBy] = useState('newest');
   const [user, setUser] = useState(null);
 
-  const API_URL = 'http://localhost:5000/api';
+  const API_URL = 'https://mihwardigital-botboss-flask-backend.hf.space/api';
 
   useEffect(() => {
     // Get user from localStorage
