@@ -29,7 +29,7 @@ function Login() {
     }
 
     try {
-      const response = await fetch('https://mihwardigital-botboss-flask-backend.hf.space/api', {
+      const response = await fetch('https://mihwardigital-botboss-flask-backend.hf.space/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
