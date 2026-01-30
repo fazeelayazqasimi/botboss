@@ -27,7 +27,7 @@ function SeekerDashboard() {
     salary: 'all'
   });
 
-  const API_URL = 'http://localhost:5000/api';
+  const API_URL = 'https://mihwardigital-botboss-flask-backend.hf.space/api';
 
   useEffect(() => {
     const userData = localStorage.getItem('user');
