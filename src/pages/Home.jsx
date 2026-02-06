@@ -403,7 +403,7 @@ const Home = () => {
       <section style={styles.categoriesSection}>
         <div style={styles.sectionContainer}>
           <div style={styles.sectionHeader}>
-            <h2 style={styles.sectionTitle}>Explore Job Categories</h2>
+            <h2 style={{ ...styles.sectionTitle, color: "white !important" }}>Explore Job Categories</h2>
             <p style={styles.sectionSubtitle}>
               Browse jobs by industry and find your perfect match
             </p>
@@ -917,7 +917,7 @@ const Home = () => {
           
           <div style={styles.footerBottom}>
             <p style={styles.copyright}>
-              © {new Date().getFullYear()} BOTBOSS. All rights reserved.
+              © {new Date().getFullYear()} BOTBOSS. All rights reserved. This Made by Mihwar Digital
             </p>
             <div style={styles.footerSocial}>
               <span style={styles.socialIcon}>

@@ -16,5 +16,13 @@
     "password": "fazeel123",
     "role": "seeker",
     "created_at": "2026-01-27T16:32:01.444117"
+  },
+  {
+    "id": "user_20260203001843_3",
+    "name": "tabish",
+    "email": "tabish@gmail.com",
+    "password": "123456",
+    "role": "seeker",
+    "created_at": "2026-02-03T00:18:43.812569"
   }
 ]

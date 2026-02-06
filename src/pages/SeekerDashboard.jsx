@@ -190,13 +190,17 @@ function SeekerDashboard() {
       
       if (response.ok) {
         const result = await response.json();
-        alert('Application submitted successfully!');
+        alert('✅ Application submitted successfully!');
         
         await loadApplications(user.id);
         
-        if (confirm('Would you like to complete an AI interview now?')) {
-          navigate('/interview');
+        // ⬇️⬇️⬇️ YE NAYA CODE HAI - INTERVIEW KE LIYE ⬇️⬇️⬇️
+        if (confirm('🎤 Would you like to start your AI interview now?')) {
+          // Navigate to interview page with application ID and job ID
+          navigate(`/interview/${result.application.id}/${job.id}`);
         }
+        // ⬆️⬆️⬆️ NAYA CODE KHATAM ⬆️⬆️⬆️
+        
       } else {
         const error = await response.json();
         alert(`${error.error || 'Failed to submit application'}`);
@@ -909,14 +913,15 @@ function SeekerDashboard() {
                       </div>
 
                       <div style={styles.applicationActions}>
-                        <button 
-                          style={styles.actionButton}
-                          onClick={() => {
-                            alert('Interview feature coming soon!');
-                          }}
-                        >
-                          Prepare for Interview
-                        </button>
+                       <button 
+  style={styles.actionButton}
+  onClick={() => {
+    // Navigate to interview page with this application
+    navigate(`/interview/${app.id}/${app.jobId}`);
+  }}
+>
+  🎤 Start Interview
+</button>
                         <button 
                           style={styles.secondaryButton}
                           onClick={() => {
@@ -969,11 +974,24 @@ function SeekerDashboard() {
                     Practice with AI-powered interviews tailored to your job applications
                   </p>
                   <button 
-                    style={styles.primaryButton}
-                    onClick={() => navigate('/interview')}
-                  >
-                    Start Practice Interview
-                  </button>
+  style={styles.primaryButton}
+  onClick={() => {
+    // Check if user has any applications
+    if (appliedJobs.length === 0) {
+      alert('❌ Please apply to a job first!');
+      setActiveTab('browse');
+      return;
+    }
+    
+    // Get the latest application
+    const latestApp = appliedJobs[0];
+    
+    // Start interview for latest application
+    navigate(`/interview/${latestApp.id}/${latestApp.jobId}`);
+  }}
+>
+  Start Practice Interview
+</button>
                 </div>
 
                 <div style={styles.interviewCard}

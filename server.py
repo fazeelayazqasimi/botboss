@@ -3,9 +3,12 @@ from flask_cors import CORS
 import json
 import os
 from datetime import datetime
+from interview import interview_bp
 
 app = Flask(__name__)
 CORS(app)  # Allow all origins for development
+
+app.register_blueprint(interview_bp, url_prefix='/api/interview')
 
 # Data file paths
 DATA_FOLDER = 'data'
