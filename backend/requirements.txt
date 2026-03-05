@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+langchain
+langchain-core
+langchain-google-genai
+google-generativeai
+python-dotenv
+SpeechRecognition
+python-multipart
